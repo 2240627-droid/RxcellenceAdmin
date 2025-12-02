@@ -23,8 +23,5 @@
   "bugs": {
     "url": "https://github.com/2240627-droid/RxcellenceAdmin/issues"
   },
-  "homepage": "https://github.com/2240627-droid/RxcellenceAdmin#readme",
-  "dependencies": {
-    "dotenv": "^17.2.3"
-  }
+  "homepage": "https://github.com/2240627-droid/RxcellenceAdmin#readme"
 }
