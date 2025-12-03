@@ -1,11 +1,14 @@
-const pool = require('../config/db');
+const db = require('../config/db');
 
-exports.testDb = async (req, res) => {
-  try {
-    const result = await pool.query('SELECT NOW()');
-    res.json(result.rows);
-  } catch (err) {
-    console.error('DB connection error:', err);
-    res.status(500).send('DB error');
-  }
+exports.getAdmins = (req, res) => {
+  db.query(
+    'SELECT admin_id AS id, admin_name AS name FROM admins',
+    (err, results) => {
+      if (err) {
+        console.error('Query error:', err);
+        return res.status(500).json({ error: 'Database error' });
+      }
+      res.json(results);
+    }
+  );
 };

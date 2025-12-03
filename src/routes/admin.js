@@ -1,8 +1,8 @@
-// src/routes/admin.js
 const express = require('express');
 const router = express.Router();
-const { testDb } = require('../controllers/adminController');
+const { getAdmins } = require('../controllers/adminController');
 
-router.get('/test-db', testDb);
+// GET /api/admins
+router.get('/admins', getAdmins);
 
-module.exports = router;   
+module.exports = router;

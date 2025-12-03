@@ -11,7 +11,7 @@
   "author": "Louella",
   "license": "ISC",
   "devDependencies": {
-    "express": "^5.1.0",
+    "express": "^5.2.1",
     "nodemon": "^3.1.11",
     "pg": "^8.16.3"
   },
@@ -23,5 +23,9 @@
   "bugs": {
     "url": "https://github.com/2240627-droid/RxcellenceAdmin/issues"
   },
-  "homepage": "https://github.com/2240627-droid/RxcellenceAdmin#readme"
+  "homepage": "https://github.com/2240627-droid/RxcellenceAdmin#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "mysql2": "^3.15.3"
+  }
 }
