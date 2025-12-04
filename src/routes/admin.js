@@ -1,8 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const { getAdmins } = require('../controllers/adminController');
+const { getMedicines } = require('../controllers/adminController');
 
-// GET /api/admins
-router.get('/admins', getAdmins);
+// GET /api/medicines
+router.get('/medicines', getMedicines);
+
+// Backwards-compatible admin route (points to the same medicines handler)
+router.get('/admins', getMedicines);
 
 module.exports = router;

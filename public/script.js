@@ -1,11 +1,11 @@
-fetch('/api/admins')
+fetch('/api/medicines')
   .then(res => res.json())
   .then(data => {
-    const tbody = document.querySelector('#admins-table tbody');
-    data.forEach(admin => {
+    const tbody = document.querySelector('#medicines-table tbody');
+    data.forEach(medicines => {
       const tr = document.createElement('tr');
-      tr.innerHTML = `<td>${admin.id}</td><td>${admin.name}</td>`;
+      tr.innerHTML = `<td>${medicines.id}</td><td>${medicines.name}</td><td>${medicines.brand}</td><td>${medicines.category}</td><td>${medicines.dosage}</td><td>${medicines.form}</td><td>${medicines.price}</td>`;
       tbody.appendChild(tr);
     });
   })
-  .catch(err => console.error('Error fetching admins:', err));
+  .catch(err => console.error('Error fetching medicines:', err));

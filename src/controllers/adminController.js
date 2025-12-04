@@ -1,8 +1,8 @@
 const db = require('../config/db');
 
-exports.getAdmins = (req, res) => {
+exports.getMedicines = (req, res) => {
   db.query(
-    'SELECT admin_id AS id, admin_name AS name FROM admins',
+    "SELECT med_id AS id, name AS name, brand, type AS category, dosage, form, price FROM medicines",
     (err, results) => {
       if (err) {
         console.error('Query error:', err);
@@ -12,3 +12,5 @@ exports.getAdmins = (req, res) => {
     }
   );
 };
+
+exports.getAdmins = exports.getMedicines;
