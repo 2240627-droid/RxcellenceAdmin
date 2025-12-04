@@ -1,11 +1,14 @@
+// filepath: c:\xampp\htdocs\RxcellenceAdmin\server\routes\admin.js
 const express = require('express');
 const router = express.Router();
-const { getMedicines } = require('../controllers/adminController');
 
-// GET /api/medicines
-router.get('/medicines', getMedicines);
+/**
+ * Admin-specific Routes
+ * Placeholder for admin endpoints.
+ */
 
-// Backwards-compatible admin route (points to the same medicines handler)
-router.get('/admins', getMedicines);
+router.get('/', (req, res) => {
+  res.json({ message: 'Admin route working!' });
+});
 
 module.exports = router;

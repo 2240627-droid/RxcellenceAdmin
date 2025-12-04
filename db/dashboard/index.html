@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rxcellence Admin Dashboard</title>
+  <link rel="stylesheet" href="/public/admin_standard.css">
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <h1>Admin Dashboard</h1>
+      <nav class="dashboard-nav">
+        <button>Registration</button>
+        <button>Medicine Master List</button>
+        <button>Affiliation</button>
+        <button>System Monitoring</button>
+        <button>Analytics and Reports</button>
+        <button>User Management</button>
+      </nav>
+    </header>
+
+    <main class="dashboard-main">
+      <section class="dashboard-left">
+        <div class="log-box">
+          <h2>Logs</h2>
+          <ul>
+            <!-- Log items will be dynamically added later -->
+          </ul>
+        </div>
+        <div class="security-alert-box">
+          <h2>Security Alert</h2>
+          <ul>
+            <!-- Security alert items will be dynamically added later -->
+          </ul>
+        </div>
+      </section>
+
+      <section class="dashboard-right">
+        <div class="time-filter">
+          <button class="filter-btn active">Day</button>
+          <button class="filter-btn">Week</button>
+          <button class="filter-btn">Month</button>
+        </div>
+        <div class="data-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>User</th>
+                <th>Action</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Table rows will be dynamically added later -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <footer class="dashboard-footer">
+      <p>&copy; 2025 Rxcellence Admin</p>
+    </footer>
+  </div>
+</body>
+</html>
