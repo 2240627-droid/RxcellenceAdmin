@@ -1,6 +1,5 @@
 // filepath: screens/auth/controllers/authController.js
 const { findByName } = require('../models/adminModel');
-const bcrypt = require('bcrypt');
 
 // Track failed attempts and warnings in memory
 const failedAttempts = {};
@@ -8,8 +7,8 @@ const warnings = {};
 
 /**
  * POST /auth/login
- * Handles admin login with bcrypt password check,
- * failed attempt tracking, and redirect to dashboard.
+ * Handles admin login with plaintext password check,
+ * failed attempt tracking, session creation, and redirect to dashboard.
  */
 const login = async (req, res) => {
   const { admin_name, password } = req.body;
@@ -23,13 +22,27 @@ const login = async (req, res) => {
       return handleFailure(admin_name, res, 'Invalid credentials: user not found');
     }
 
-    const passwordMatch = await bcrypt.compare(password, admin.password);
+    // Plaintext comparison
+    const passwordMatch = (password === admin.password);
+
     if (!passwordMatch) {
       return handleFailure(admin_name, res, 'Invalid credentials: wrong password');
     }
 
+  
     failedAttempts[admin_name] = 0;
     console.log(`Login successful for "${admin_name}"`);
+
+    if (!req.session) {
+      console.error('Session is undefined — middleware may not be applied correctly');
+      return res.status(500).send('Session error');
+    }
+
+    req.session.admin = {
+      id: admin.admin_id,
+      name: admin.admin_name,
+      role: 'admin'
+    };
 
     return res.redirect('/dashboard.html');
   } catch (err) {
@@ -38,9 +51,6 @@ const login = async (req, res) => {
   }
 };
 
-/**
- * Handles failed login attempts and issues warnings after 3 failures.
- */
 function handleFailure(admin_name, res, message) {
   failedAttempts[admin_name] = (failedAttempts[admin_name] || 0) + 1;
 
@@ -49,7 +59,7 @@ function handleFailure(admin_name, res, message) {
     console.warn(
       `Warning issued for "${admin_name}" after 3 failed attempts. Total warnings: ${warnings[admin_name]}`
     );
-    failedAttempts[admin_name] = 0; // reset after warning
+    failedAttempts[admin_name] = 0;
     return res
       .status(403)
       .send(`Warning: Too many failed attempts (Warnings: ${warnings[admin_name]})`);
@@ -59,4 +69,19 @@ function handleFailure(admin_name, res, message) {
   return res.status(401).send(message);
 }
 
-module.exports = { login };
+const logout = (req, res) => {
+  if (!req.session) {
+    console.error('No session found during logout');
+    return res.redirect('/login');
+  }
+
+  req.session.destroy(err => {
+    if (err) {
+      console.error('Logout error:', err);
+      return res.status(500).send('Error logging out');
+    }
+    res.redirect('/login');
+  });
+};
+
+module.exports = { login, logout };
